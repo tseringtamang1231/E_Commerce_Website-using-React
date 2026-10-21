@@ -6,7 +6,7 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import Input from './components/Input'
 import Footer from './components/Footer/Footer'
-import Container from './components/container/Container'
+import {Container} from "./components"
 import Login from './components/Login'
 import Signup from './components/Signup'
 import { Outlet } from 'react-router-dom'

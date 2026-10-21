@@ -7,14 +7,21 @@ import { Provider } from 'react-redux'
 import store from './store/store.js'
 import  Login from './components/Login.jsx'
 import  Signup from './components/Signup.jsx'
+import Home from './pages/Home.jsx'
+import Shop from './pages/Shop.jsx'
+import About from './pages/About.jsx'
+import Contact from './pages/Contact.jsx'
 
 const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<App />} >
-        {/* <Route  path='/' element={<Home />} /> */}
+        <Route  path='/' element={<Home />} />
         <Route  path='/login' element={<Login />} />
         <Route  path='/signup' element={<Signup />} />
-        {/* <Route  path='/' element={<Home />} /> */}
+        <Route  path='/products' element={<Shop />} />
+        <Route  path='/About' element={<About />} />
+        <Route  path='/Contact' element={<Contact />} />
+        
       </Route>
     )
 )

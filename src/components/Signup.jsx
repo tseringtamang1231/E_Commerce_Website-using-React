@@ -1,9 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Input from '../components/Input'
-import Button from '../components/Button'
-
+import { Input , Button , Logo} from './index'
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../store/authSlice'
 function Signup() {
+  const Dispatch = useDispatch()
+  const Navigate = useNavigate() 
+  const {register , handleSubmit} = useForm()
+  const formhandler = (data ) =>{
+    Dispatch(login(data))
+    Navigate("/")
+  }
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-10">
       <div className="grid w-full max-w-5xl overflow-hidden rounded-lg border border-gray-100 bg-white md:grid-cols-2">
@@ -25,13 +34,34 @@ function Signup() {
 
         {/* Right: form */}
         <div className="flex flex-col justify-center p-8 sm:p-12">
-          <h1 className="text-lg font-bold text-gray-900">ShopZone</h1>
-          <h2 className="mt-1 text-sm font-semibold text-gray-800">Create Your Account</h2>
+           <Logo className={`text-2xl font-bold text-gray-900`} />
+          <h1 className="mt-1 text-sm font-semibold text-gray-800">Create Your Account</h1>
 
-          <form onSubmit={(e) => e.preventDefault()} className="mt-6 space-y-4">
-            <Input icon="👤" type="text" placeholder="Full Name" />
+          <form onSubmit={handleSubmit(formhandler)} className="mt-6 space-y-4">
+            <Input 
+            icon="👤"
+            placeholder="Full Name"
+            {...register('name' , {
+              required : true,
+            })}
+            />
+            <Input 
+            icon="✉️"
+            placeholder="Enter your email!"
+            {...register('email' , {
+              required : true,
+            })}
+            />
+            <Input 
+            icon="🔒"
+            placeholder="Enter your password"
+            {...register('password' , {
+              required : true,
+            })}
+            />
+            {/* <Input icon="👤" type="text" placeholder="Full Name" />
             <Input icon="✉️" type="email" placeholder="Email address" />
-            <Input icon="🔒" type="password" placeholder="Password" />
+            <Input icon="🔒" type="password" placeholder="Password" /> */}
 
             <label className="flex items-center gap-2 text-xs text-gray-600">
               <input type="checkbox" />
@@ -43,7 +73,7 @@ function Signup() {
               </span>
             </label>
 
-            <Button type="submit" className="w-full">
+            <Button className="w-full">
               Sign Up
             </Button>
           </form>
