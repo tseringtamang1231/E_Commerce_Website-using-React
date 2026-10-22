@@ -11,7 +11,7 @@ import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
-
+import Favourite from './pages/Favourite.jsx'
 const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<App />} >
@@ -21,6 +21,7 @@ const router = createBrowserRouter(
         <Route  path='/products' element={<Shop />} />
         <Route  path='/About' element={<About />} />
         <Route  path='/Contact' element={<Contact />} />
+        <Route  path='/Favourite' element={<Favourite />} />
         
       </Route>
     )

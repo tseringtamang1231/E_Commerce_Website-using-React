@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import {Logoutbtn} from "../index";
 import { Input } from "../index";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 // const links = [
 //   { label: "Home", to: "/" },
 //   { label: "Shop", to: "/products" },
@@ -37,6 +37,7 @@ export default function Navbar() {
   const onSubmit = (data) => {
     navigate('/products', {state: {search: data.search}})
   }
+  const wishlistCount = useSelector((state) => state.whitelist.items.length)
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-100 bg-white">
@@ -61,15 +62,16 @@ export default function Navbar() {
 
         {/* Search */}
         <form onSubmit={handleSubmit(onSubmit)} className="relative ml-auto min-w-0 flex-1 md:max-w-md">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm opacity-50">
-            🔍
-          </span>
+          
           <Input
             type="text"
             placeholder="Search for products..."
             {...register("search")}
             className="w-full rounded-md bg-gray-100 py-2.5 pl-10 pr-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:ring-1 focus:ring-gray-300"
           />
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm opacity-50">
+            🔍
+          </span>
         </form>
 
         {/* Icons */}
@@ -120,9 +122,14 @@ export default function Navbar() {
               </>
             )}
           </div>
-          <Link to="/wishlist" aria-label="Wishlist">
-          🤍
-          </Link>
+          <Link to="/Favourite" aria-label="Wishlist" className="relative">
+  🤍
+  {wishlistCount > 0 && (
+    <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-1.5 text-xs text-white">
+      {wishlistCount}
+    </span>
+  )}
+</Link>
 
 
           <Link to="/cart" aria-label="Cart">
